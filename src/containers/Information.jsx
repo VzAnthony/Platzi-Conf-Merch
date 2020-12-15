@@ -1,11 +1,12 @@
 import React, { useContext, useRef } from 'react';
 import AppContext from '../context/AppContext';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import '../styles/components/Information.css';
 
 const Information = () => {
     const { state: { cart }, addToBuyer } = useContext(AppContext)
     const form = useRef(null);
+    const history = useHistory();
 
     const handleSubmit = () => {
         const formData = new FormData(form.current);
@@ -21,7 +22,7 @@ const Information = () => {
             'phone': formData.get('phone'),
         }
         addToBuyer(buyer);
-
+        history.push('/checkout/payment');
     }
 
     return (
